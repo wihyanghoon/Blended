@@ -1,5 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+
+interface state {
+    isloading : boolean,
+    gradient : object[],
+    error: string
+}
+
 
 export const __postGradient = createAsyncThunk(
     "gradient/post",
@@ -8,14 +15,15 @@ export const __postGradient = createAsyncThunk(
             const data = await axios.post("api/plan", payload);
             return thunkAPI.fulfillWithValue(data.data);
         } catch (error) {
-            return thunkAPI.rejectWithValue(error.response.data);
+            return thunkAPI.rejectWithValue(error);
         }
     }
 )
 
-const initialState = {
-    isLoading : true,
-    gradient: []
+const initialState : state = {
+    isloading : true,
+    gradient : [],
+    error: "",
 }
 
 const gradientSlice = createSlice({
@@ -24,7 +32,19 @@ const gradientSlice = createSlice({
     reducers:{
     },
     extraReducers: (builder) => {
-        builder.addCase(__postGradient.pending, (state, action) => {
+        builder.addCase(__postGradient.pending, (state) => {
+            state.isloading = true;
+        })
+        builder.addCase(__postGradient.fulfilled, (state, action : PayloadAction<object>) => {
+            state.isloading = false;
+            state.gradient.push(action.payload)
+        })
+        builder.addCase(__postGradient.fulfilled, (state, action : PayloadAction<string>) => {
+            state.isloading = true;
+            state.error = action.payload
         })
       },
 })
+
+export const {} = gradientSlice.actions;
+export default gradientSlice.reducer;
