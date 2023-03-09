@@ -56,12 +56,13 @@ const Alert = styled.div<{ status: boolean }>`
     align-items: center;
     flex-direction: column;
 
-    >button {
+    button {
         padding: 5px 10px;
         font-size: 0.8rem;
         border: none;
         border-radius: 5px;
         margin-top: 20px;
+        cursor: pointer;
     }
 `
 
@@ -73,6 +74,10 @@ const Wrap = styled.div`
     flex-grow: 1;
     position: relative;
     overflow: hidden;
+    transition: box-shadow 0.3s;
+    &:hover{
+        box-shadow: 0 6px 15px rgb(36 37 38 / 12%);
+    }
 `
 
 const Containter = styled.div`
@@ -103,6 +108,10 @@ const Bottom = styled.div`
 
     span{
         font-weight: 300;
+    }
+
+    span:nth-child(2){
+        cursor: pointer;
     }
 `
 export default GradientCard

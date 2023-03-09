@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { ThemeProvider } from 'styled-components'
+import { Provider } from "react-redux";
+import store from './redux/config/cofigStore';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,8 +22,10 @@ const commonTheme = {
 
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={commonTheme}>
-      <App />
-    </ThemeProvider>
+    <Provider store={store}>  
+      <ThemeProvider theme={commonTheme}>
+        <App />
+      </ThemeProvider>
+      </Provider>
   </React.StrictMode>
 );

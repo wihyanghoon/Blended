@@ -22,6 +22,18 @@ const Home = () => {
         toColor: "#fdfdfd",
         fromColor: "#322333",
         CopyCss: "linear-gradient(to right, red, blue)"
+    },{
+        toColor: "#fdfdfd",
+        fromColor: "#322333",
+        CopyCss: "linear-gradient(to right, red, blue)"
+    },{
+        toColor: "#fdfdfd",
+        fromColor: "#322333",
+        CopyCss: "linear-gradient(to right, red, blue)"
+    },{
+        toColor: "#fdfdfd",
+        fromColor: "#322333",
+        CopyCss: "linear-gradient(to right, red, blue)"
     }]
 
     return (
@@ -59,7 +71,6 @@ const Wrapper = styled.div`
 const Wrap = styled.section`
     width: 100%;
     min-height: 100vh;
-    padding-top: 80px;
     box-sizing : content-box;
     display: flex;
     align-items: center;
