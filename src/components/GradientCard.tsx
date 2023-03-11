@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-interface InfoProps {
+type InfoProps = {
     info: {
         toColor: string,
         CopyCss: string,
@@ -67,16 +67,29 @@ const Alert = styled.div<{ status: boolean }>`
 `
 
 const Wrap = styled.div`
+    width: 23.5%;
     height: 420px;
     background-color: #fff;
     border-radius: 16px;
     box-shadow: 0 6px 15px rgb(36 37 38 / 8%);
-    flex-grow: 1;
     position: relative;
     overflow: hidden;
+    margin-bottom: 2%;
     transition: box-shadow 0.3s;
     &:hover{
         box-shadow: 0 6px 15px rgb(36 37 38 / 12%);
+    }
+
+    @media screen and (max-width:1350px){
+        width: 32%;
+    }
+
+    @media screen and (max-width:900px){
+        width: 49%;
+    }
+
+    @media screen and (max-width:700px){
+        width: 100%;
     }
 `
 
@@ -99,7 +112,7 @@ const Middle = styled.div<{ colorinfo: string }>`
     width: 240px;
     height: 240px;
     border-radius: 100%;
-    background: ${props => props.colorinfo}
+    background: ${props => props.colorinfo};
 `
 const Bottom = styled.div`
     width: 100%;

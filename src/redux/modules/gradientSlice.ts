@@ -1,12 +1,18 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction, } from "@reduxjs/toolkit";
 import axios from "axios";
 
-interface state {
-    isloading : boolean,
-    gradient : object[],
+type StateType = {
+    isloading: boolean,
+    gradient: object[],
     error: string
 }
 
+type PayloadType = {
+    _id: string,
+    toColor: string,
+    fromColor: string,
+    copsCss: string
+}
 
 export const __postGradient = createAsyncThunk(
     "gradient/post",
@@ -20,31 +26,31 @@ export const __postGradient = createAsyncThunk(
     }
 )
 
-const initialState : state = {
-    isloading : true,
-    gradient : [],
+const initialState: StateType = {
+    isloading: true,
+    gradient: [],
     error: "",
 }
 
 const gradientSlice = createSlice({
     name: "gradient",
     initialState,
-    reducers:{
+    reducers: {
     },
     extraReducers: (builder) => {
         builder.addCase(__postGradient.pending, (state) => {
             state.isloading = true;
         })
-        builder.addCase(__postGradient.fulfilled, (state, action : PayloadAction<object>) => {
+        builder.addCase(__postGradient.fulfilled, (state, action: PayloadAction<PayloadType>) => {
             state.isloading = false;
             state.gradient.push(action.payload)
         })
-        builder.addCase(__postGradient.fulfilled, (state, action : PayloadAction<string>) => {
+        builder.addCase(__postGradient.fulfilled, (state, action: PayloadAction<string>) => {
             state.isloading = true;
             state.error = action.payload
         })
-      },
+    },
 })
 
-export const {} = gradientSlice.actions;
+export const { } = gradientSlice.actions;
 export default gradientSlice.reducer;

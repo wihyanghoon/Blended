@@ -96,7 +96,7 @@ const Section = styled.section`
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
-        gap: 30px;
+        gap: 2%;
         padding: 60px 16px;
     }
 `
