@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-type InfoProps = {
+type PropTypes = {
     info: {
         toColor: string,
         CopyCss: string,
@@ -9,7 +9,7 @@ type InfoProps = {
     }
 }
 
-const GradientCard = ({ info }: InfoProps) => {
+const GradientCard = ({ info }: PropTypes) => {
     const [status, setSatus] = useState<boolean>(false)
 
     const copyHandler = async (text: string, event: React.MouseEvent<HTMLElement>,) => {

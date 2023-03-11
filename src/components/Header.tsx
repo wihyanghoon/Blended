@@ -10,7 +10,6 @@ const Header = () => {
             <ul>
                 <li><Link to="/">HOME</Link></li>
                 <li><Link to="/gradient">GRADIENT</Link></li>
-                <li><Link to="/button">BUTTON</Link></li>
             </ul>
         </Nav>
     </Wrap>
@@ -21,13 +20,14 @@ const Wrap = styled.header`
     width: 100%;
     height: 81px;
     background-color: #fff;
-    padding: 0px 16px;
     position: fixed;
+    z-index: 98;
 `
 
 const Nav = styled.nav`
-    max-width: 1280px;
+    max-width: 1340px;
     margin: 0 auto;
+    padding: 0px 16px;
     border-bottom: 1px solid ${prop => prop.theme.borderColor};
     ul{
         display: flex;

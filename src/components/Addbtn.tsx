@@ -1,7 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Addbtn = () => {
+
+// 타입
+type PropsTypes = {
+  onClick: () => void
+}
+
+const Addbtn = ({onClick}:PropsTypes) => {
   return (
     <Wrap type='button'>
         Made Gradient
