@@ -7,6 +7,7 @@ const Header = () => {
   return (
     <Wrap>
         <Nav>
+            <h1><img src="logo.png" alt="" /></h1>
             <ul>
                 <li><Link to="/">HOME</Link></li>
                 <li><Link to="/gradient">GRADIENT</Link></li>
@@ -29,6 +30,16 @@ const Nav = styled.nav`
     margin: 0 auto;
     padding: 0px 16px;
     border-bottom: 1px solid ${prop => prop.theme.borderColor};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1{
+        width: 100px;
+        img{
+            width: 100%;
+            display: block;
+        }
+    }
     ul{
         display: flex;
         gap: 15px;
