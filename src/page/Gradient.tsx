@@ -2,11 +2,6 @@ import { type } from 'os'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 
-
-//components
-import Addbtn from '../components/Addbtn'
-import Loading from '../components/Loading'
-
 const Gradient = () => {
   const [colorLeft, setColorLeft] = useState<string>("#32B3A4");
   const [colorRight, setColorRight] = useState<string>("#A8EB12");
@@ -26,6 +21,15 @@ const Gradient = () => {
   }, [colorRight, colorLeft])
 
 
+  const copyHandler = useCallback( async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(`background: linear-gradient(${text})`);
+      alert('복사 성공!');
+    } catch (error) {
+      alert('복사 실패!');
+    }
+  }, [css])
+
 
   return (
     <>
@@ -39,7 +43,7 @@ const Gradient = () => {
             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="24" height="24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg>
           </li>
           <li onClick={() => { setCss(`to top, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()}`) }}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="24" height="24"><path d="M18.655 10.405a.75.75 0 0 1-1.06 0l-4.97-4.97v14.44a.75.75 0 0 1-1.5 0V5.435l-4.97 4.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l6.25-6.25a.75.75 0 0 1 1.06 0l6.25 6.25a.75.75 0 0 1 0 1.06Z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="24" height="24"><path d="M18.655 10.405a.75.75 0 0 1-1.06 0l-4.97-4.97v14.44a.75.75 0 0 1-1.5 0V5.435l-4.97 4.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l6.25-6.25a.75.75 0 0 1 1.06 0l6.25 6.25a.75.75 0 0 1 0 1.06Z"></path></svg>
           </li>
           <li onClick={() => { setCss(`to bottom, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()}`) }}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="24" height="24"><path d="M4.97 13.22a.75.75 0 0 1 1.06 0L11 18.19V3.75a.75.75 0 0 1 1.5 0v14.44l4.97-4.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734l-6.25 6.25a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06Z"></path></svg>
@@ -64,7 +68,10 @@ const Gradient = () => {
         <Submit onClick={onClickHandler}>GENERATE</Submit>
 
         <CssArea>
-          <span>CSS CODE:</span>
+          <Top>
+            <span>CSS CODE:</span>
+            <span onClick={() => {copyHandler(css)}}><svg xmlns="http://www.w3.org/2000/svg" fill='white' viewBox="0 0 16 16" width="16" height="16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"></path></svg></span>
+          </Top>
           <Area>
             background: linear-gradient({css})
           </Area>
@@ -116,6 +123,10 @@ const InputContainer = styled.div<{ color: string }>`
     box-shadow: 10px 10px 14px 1px rgb(0 0 0 / 20%);
     display: flex;
     position: relative;
+    transition: all 0.3s;
+    &:hover{
+      box-shadow: 10px 10px 14px 1px rgb(0 0 0 / 50%);
+    }
     span{
       position: absolute;
       top: 50%;
@@ -127,6 +138,7 @@ const InputContainer = styled.div<{ color: string }>`
       width: 100%;
       height: 100%;
       opacity: 0;
+      cursor: pointer;
     }
   }
 `
@@ -175,10 +187,20 @@ const Submit = styled.button`
 const CssArea = styled.div`
   max-width: 450px;
   margin-top: 60px;
+  
+`
+
+const Top = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   span {
     font-size: 1rem;
     font-weight: 900;
     color: #ffffff;
+  }
+  span:nth-child(2){
+    cursor: pointer;
   }
 `
 

@@ -10,7 +10,7 @@ const Header = () => {
             <h1><Link to="/"><img src="logo.png" alt="" /></Link></h1>
             <ul>
                 <li><Link to="/">GRADIENT</Link></li>
-                <li><Link to="/how">HOW TO USE</Link></li>
+                <li><Link to="/howto">HOW TO USE</Link></li>
             </ul>
         </Nav>
     </Wrap>
@@ -51,6 +51,36 @@ const Nav = styled.nav`
                 font-family: ${prop => prop.theme.engFont};
                 font-size: 0.625rem;
                 font-weight: 600;
+                position: relative;
+                transition: 0.3s all;
+
+                &:after{
+                    content: "";
+                    position: absolute;
+                    width: 0px;
+                    height: 2px;
+                    bottom: 0px;
+                    right: 50%;
+                    transition: 0.3s;
+                    background-color: #fff;
+                }
+                &:hover:after{
+                    width: 50%;
+                }
+
+                &::before{
+                    content: "";
+                    position: absolute;
+                    width: 0px;
+                    height: 2px;
+                    bottom: 0px;
+                    left: 50%;
+                    transition: 0.3s;
+                    background-color: #fff;
+                }
+                &:hover::before{
+                    width: 50%;
+                }
             }
         }
     }
