@@ -14,7 +14,7 @@ const routes = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Gradient />}/>
         <Route path="/gradient" element={<Gradient />}/>
         <Route path="/" element={<Button />}/>
       </Routes>
