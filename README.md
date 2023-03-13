@@ -10,7 +10,7 @@ css 제네레이터 토이프로젝트<br />
 퍼블리셔 및 프론트엔드 개발자를 위한 사이트 입니다.
 
 #### 프로젝트 URL
-https://moobplback.herokuapp.com/
+https://wihyanghoon.github.io/Blended
 
 ## 팀원 구성
 | **위향훈(프론트엔드)** |
