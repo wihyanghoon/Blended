@@ -174,6 +174,10 @@ const Title = styled.h1<{ status: boolean }>`
   font-size: 42px;
   margin-bottom: 40px;
   color: ${props => props.status ? "#000" : "#fff"};
+
+  @media screen and (max-width: 600px) {
+    font-size: 32px;
+  }
 `
 
 const Container = styled.div`
