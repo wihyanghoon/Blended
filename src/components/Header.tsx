@@ -20,7 +20,8 @@ const Header = () => {
 const Wrap = styled.header`
     width: 100%;
     height: 81px;
-    background-color: transparent;
+    background-color: rgba(189, 189, 189, 0.1);
+    backdrop-filter: blur(3.5px);
     position: fixed;
     z-index: 98;
 `
@@ -62,7 +63,7 @@ const Nav = styled.nav`
                     bottom: 0px;
                     right: 50%;
                     transition: 0.3s;
-                    background-color: #fff;
+                    background-color: #000;
                 }
                 &:hover:after{
                     width: 50%;
@@ -76,7 +77,7 @@ const Nav = styled.nav`
                     bottom: 0px;
                     left: 50%;
                     transition: 0.3s;
-                    background-color: #fff;
+                    background-color: #000;
                 }
                 &:hover::before{
                     width: 50%;
