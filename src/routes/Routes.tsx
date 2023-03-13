@@ -5,9 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from '../components/Header'
 
 // page
-import Home from '../page/Home'
 import Gradient from '../page/Gradient'
-import Button from '../page/Button'
+import How from '../page/How'
 
 const routes = () => {
   return (
@@ -15,8 +14,7 @@ const routes = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Gradient />}/>
-        <Route path="/gradient" element={<Gradient />}/>
-        <Route path="/" element={<Button />}/>
+        <Route path="/howto" element={<How />}/>
       </Routes>
       
     </BrowserRouter>
