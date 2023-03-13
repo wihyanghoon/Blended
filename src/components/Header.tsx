@@ -22,6 +22,7 @@ const Wrap = styled.header`
     height: 81px;
     position: fixed;
     z-index: 98;
+    background-color: transparent;
 `
 
 const Nav = styled.nav`
