@@ -1,44 +1,51 @@
 import { type } from 'os'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const Gradient = () => {
   const [colorLeft, setColorLeft] = useState<string>("#32B3A4");
   const [colorRight, setColorRight] = useState<string>("#A8EB12");
   const [css, setCss] = useState<string>(" to right, #32B3A4, #A8EB12 ");
+  const [textColor1, setTextColor1] = useState<boolean>(true)
+  const [textColor2, setTextColor2] = useState<boolean>(true)
   const [status, setStatus] = useState<boolean>(false);
-
 
 
   const onChnageLeft = (event: React.ChangeEvent<HTMLInputElement>) => {
     setColorLeft(event.currentTarget.value)
+
+    getTextColor1(colorLeft)
   }
 
   const onChnageRight = (event: React.ChangeEvent<HTMLInputElement>) => {
     setColorRight(event.currentTarget.value)
+
+    getTextColor2(colorRight)
   }
 
   const onClickHandler = useCallback(() => {
     setCss(` to right, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()} `)
-    
-    if(status) {
+
+    if (status) {
       setStatus(!status)
     }
 
-    if(colorLeft === "#ffffff" && colorRight === "#ffffff") {
+    if (colorLeft === "#ffffff" && colorRight === "#ffffff") {
       setStatus(true)
     }
   }, [colorRight, colorLeft])
 
-  const refreshHandler = useCallback(()=>{
+  const refreshHandler = useCallback(() => {
     setColorLeft("#32B3A4")
     setColorRight("#A8EB12")
     setCss(' to right, #32B3A4, #A8EB12 ')
     setStatus(false)
-  }, [colorLeft, colorRight, css, status])
+    setTextColor1(true)
+    setTextColor2(true)
+  }, [colorLeft, colorRight, css, status, textColor1, textColor2])
 
 
-  const copyHandler = useCallback( async (text: string) => {
+  const copyHandler = useCallback(async (text: string) => {
     try {
       await navigator.clipboard.writeText(`background: linear-gradient(${text})`);
       alert('복사 되었습니다.');
@@ -47,6 +54,27 @@ const Gradient = () => {
     }
   }, [css])
 
+  const getTextColor1 = (hexColor: string) => {
+    const c = hexColor.substring(1)      // 색상 앞의 # 제거
+    const rgb = parseInt(c, 16)   // rrggbb를 10진수로 변환
+    const r = (rgb >> 16) & 0xff  // red 추출
+    const g = (rgb >> 8) & 0xff  // green 추출
+    const b = (rgb >> 0) & 0xff  // blue 추출
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
+
+    luma < 127.5 ?  setTextColor1(false) : setTextColor1(true) // 글자색이
+  }
+
+  const getTextColor2 = (hexColor: string) => {
+    const c = hexColor.substring(1)      // 색상 앞의 # 제거
+    const rgb = parseInt(c, 16)   // rrggbb를 10진수로 변환
+    const r = (rgb >> 16) & 0xff  // red 추출
+    const g = (rgb >> 8) & 0xff  // green 추출
+    const b = (rgb >> 0) & 0xff  // blue 추출
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b // per ITU-R BT.709
+
+    luma < 127.5 ?  setTextColor2(false) : setTextColor2(true) // 글자색이
+  }
 
   return (
     <>
@@ -67,28 +95,28 @@ const Gradient = () => {
             <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M4.97 13.22a.75.75 0 0 1 1.06 0L11 18.19V3.75a.75.75 0 0 1 1.5 0v14.44l4.97-4.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734l-6.25 6.25a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06Z"></path></svg>
           </li>
           <li onClick={() => { setCss(` -45deg, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()} `) }}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M5.75 15.5a.75.75 0 0 1-.75-.75v-9A.75.75 0 0 1 5.75 5h9a.75.75 0 0 1 0 1.5H7.56l10.22 10.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.5 7.56v7.19a.75.75 0 0 1-.75.75Z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M5.75 15.5a.75.75 0 0 1-.75-.75v-9A.75.75 0 0 1 5.75 5h9a.75.75 0 0 1 0 1.5H7.56l10.22 10.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.5 7.56v7.19a.75.75 0 0 1-.75.75Z"></path></svg>
           </li>
           <li onClick={() => { setCss(` 45deg, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()} `) }}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M18.25 15.5a.75.75 0 0 1-.75-.75V7.56L7.28 17.78a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L16.44 6.5H9.25a.75.75 0 0 1 0-1.5h9a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75Z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M18.25 15.5a.75.75 0 0 1-.75-.75V7.56L7.28 17.78a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L16.44 6.5H9.25a.75.75 0 0 1 0-1.5h9a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75Z"></path></svg>
           </li>
           <li onClick={() => { setCss(` -135deg, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()} `) }}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M5.75 8.5a.75.75 0 0 1 .75.75v7.19L16.72 6.22a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L7.56 17.5h7.19a.75.75 0 0 1 0 1.5h-9a.75.75 0 0 1-.75-.75v-9a.75.75 0 0 1 .75-.75Z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M5.75 8.5a.75.75 0 0 1 .75.75v7.19L16.72 6.22a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L7.56 17.5h7.19a.75.75 0 0 1 0 1.5h-9a.75.75 0 0 1-.75-.75v-9a.75.75 0 0 1 .75-.75Z"></path></svg>
           </li>
           <li onClick={() => { setCss(` 135deg, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()} `) }}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M18.25 8.5a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1 0-1.5h7.19L6.22 7.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L17.5 16.44V9.25a.75.75 0 0 1 .75-.75Z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M18.25 8.5a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75h-9a.75.75 0 0 1 0-1.5h7.19L6.22 7.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L17.5 16.44V9.25a.75.75 0 0 1 .75-.75Z"></path></svg>
           </li>
         </ul>
 
         <h2>Enter colors</h2>
         <Container>
-          <InputContainer color={colorLeft}>
+          <InputContainer color={colorLeft} status={status} text={textColor1}>
             <div>
               <span>{colorLeft.toUpperCase()}</span>
               <input type="color" value={colorLeft} onChange={onChnageLeft} />
             </div>
           </InputContainer>
-          <InputContainer color={colorRight}>
+          <InputContainer color={colorRight} status={status} text={textColor2}>
             <div>
               <span>{colorRight.toUpperCase()}</span>
               <input type="color" value={colorRight} onChange={onChnageRight} />
@@ -100,7 +128,7 @@ const Gradient = () => {
         <CssArea>
           <Top status={status}>
             <span>CSS CODE:</span>
-            <span onClick={() => {copyHandler(css)}}><svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 16 16" width="16" height="16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"></path></svg></span>
+            <span onClick={() => { copyHandler(css) }}><svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 16 16" width="16" height="16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"></path></svg></span>
           </Top>
           <Area status={status}>
             background: linear-gradient({css})
@@ -112,7 +140,7 @@ const Gradient = () => {
   )
 }
 
-const Section = styled.section<{ info: string, status: boolean}>`
+const Section = styled.section<{ info: string, status: boolean }>`
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(${props => props.info});
@@ -142,7 +170,7 @@ const Section = styled.section<{ info: string, status: boolean}>`
   }
 `
 
-const Title = styled.h1<{status: boolean}>`
+const Title = styled.h1<{ status: boolean }>`
   font-size: 42px;
   margin-bottom: 40px;
   color: ${props => props.status ? "#000" : "#fff"};
@@ -163,7 +191,7 @@ const Svg = styled.svg`
   cursor: pointer;
 `
 
-const InputContainer = styled.div<{ color: string }>`
+const InputContainer = styled.div<{ color: string, status: boolean, text: boolean }>`
   div {
     width: 180px;
     height: 50px;
@@ -181,7 +209,7 @@ const InputContainer = styled.div<{ color: string }>`
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: ${props => props.color == "#ffffff" ? "#000" : "#fff"};
+      color: ${props => props.text ? "#000" : "#fff"};
     }
     input{
       width: 100%;
@@ -239,7 +267,7 @@ const CssArea = styled.div`
   padding: 0px 16px;
 `
 
-const Top = styled.div<{status: boolean}>`
+const Top = styled.div<{ status: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -253,7 +281,7 @@ const Top = styled.div<{status: boolean}>`
   }
 `
 
-const Area = styled.div<{status : boolean}>`
+const Area = styled.div<{ status: boolean }>`
     width: 100%;
     margin: 10px auto;
     display: block;
@@ -263,7 +291,7 @@ const Area = styled.div<{status : boolean}>`
     background-color: rgba(189,189,189,0.1);
     padding: 15px 8px 15px 17px;
     border-radius: 5px;
-    color: ${props=> props.status ? "#000" : "#fff"};
+    color: ${props => props.status ? "#000" : "#fff"};
 `
 
 export default Gradient   
