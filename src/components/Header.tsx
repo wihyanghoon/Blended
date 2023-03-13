@@ -1,28 +1,58 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import { Link } from 'react-router-dom'
 
-const Header = () => {
-  return (
-    <Wrap>
-        <Nav>
-            <h1><Link to="/"><img src="logo.png" alt="" /></Link></h1>
-            <ul>
-                <li><Link to="/">GRADIENT</Link></li>
-                <li><Link to="/howto">HOW TO USE</Link></li>
-            </ul>
-        </Nav>
-    </Wrap>
-  )
+type PropsTypes = {
+    ref: React.RefObject<HTMLHeadElement>
 }
 
-const Wrap = styled.header`
+const Header = () => {
+
+    
+    const [ScrollY, setScrollY] = useState(0);  // 스크롤값을 저장하기 위한 상태
+    const [status, setStatus] = useState<boolean>(false);
+    const handleFollow = () => {
+      setScrollY(window.scrollY); // window 스크롤 값을 ScrollY에 저장
+    }
+
+    useEffect(()=>{
+        if(ScrollY > 1){
+            setStatus(true)
+        } else {
+            setStatus(false)
+        }
+    }, [ScrollY])
+  
+    useEffect(() => {
+      const watch = () => {
+        window.addEventListener('scroll', handleFollow);
+      }
+      watch(); // addEventListener 함수를 실행
+      return () => {
+        window.removeEventListener('scroll', handleFollow); // addEventListener 함수를 삭제
+      }
+    }, [ScrollY])
+
+    return (
+        <Wrap status={status}>
+            <Nav>
+                <h1><Link to="/"><img src="logo.png" alt="" /></Link></h1>
+                <ul>
+                    <li><Link to="/">GRADIENT</Link></li>
+                    <li><Link to="/howto">HOW TO USE</Link></li>
+                </ul>
+            </Nav>
+        </Wrap>
+    )
+}
+
+const Wrap = styled.header<{ status : boolean}>`
     width: 100%;
     height: 81px;
     position: fixed;
     z-index: 98;
-    background-color: transparent;
+    background-color: ${props => props.status ? "#fff" : "transparant"};
 `
 
 const Nav = styled.nav`
