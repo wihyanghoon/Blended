@@ -10,7 +10,7 @@ import How from '../page/How'
 
 const routes = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header />
       <Routes>
         <Route path="/" element={<Gradient />}/>

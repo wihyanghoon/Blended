@@ -20,8 +20,6 @@ const Header = () => {
 const Wrap = styled.header`
     width: 100%;
     height: 81px;
-    background-color: rgba(189, 189, 189, 0.1);
-    backdrop-filter: blur(3.5px);
     position: fixed;
     z-index: 98;
 `
