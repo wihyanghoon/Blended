@@ -37,7 +37,7 @@ const Header = () => {
     return (
         <Wrap status={status}>
             <Nav>
-                <h1><Link to="/"><img src="logo.png" alt="" /></Link></h1>
+                <h1><Link to="/"><img src={`${process.env.PUBLIC_URL}/logo.png`} alt="" /></Link></h1>
                 <ul>
                     <li><Link to="/">GRADIENT</Link></li>
                     <li><Link to="/howto">HOW TO USE</Link></li>

@@ -9,7 +9,7 @@ const Gradient = () => {
   const [textColor1, setTextColor1] = useState<boolean>(true)
   const [textColor2, setTextColor2] = useState<boolean>(true)
   const [status, setStatus] = useState<boolean>(false);
-
+  const [active, setActive] = useState<boolean>(false);
 
   const onChnageLeft = (event: React.ChangeEvent<HTMLInputElement>) => {
     setColorLeft(event.currentTarget.value)
@@ -78,11 +78,11 @@ const Gradient = () => {
 
   return (
     <>
-      <Section info={css} status={status}>
+      <Section info={css} status={status} active={active}>
         <Title status={status}>색상을 찾아보세요.</Title>
         <h2>Choose orientation</h2>
         <ul>
-          <li onClick={() => { setCss(` to left, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()} `) }}>
+          <li onClick={() => { setCss(` to left, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()}`); }}>
             <svg xmlns="http://www.w3.org/2000/svg" fill={status ? "black" : "white"} viewBox="0 0 24 24" width="24" height="24"><path d="M10.78 19.03a.75.75 0 0 1-1.06 0l-6.25-6.25a.75.75 0 0 1 0-1.06l6.25-6.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L5.81 11.5h14.44a.75.75 0 0 1 0 1.5H5.81l4.97 4.97a.75.75 0 0 1 0 1.06Z"></path></svg>
           </li>
           <li onClick={() => { setCss(` to right, ${colorLeft.toUpperCase()}, ${colorRight.toUpperCase()} `) }}>
@@ -140,7 +140,7 @@ const Gradient = () => {
   )
 }
 
-const Section = styled.section<{ info: string, status: boolean }>`
+const Section = styled.section<{ info: string, status: boolean, active: boolean }>`
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(${props => props.info});
@@ -165,6 +165,7 @@ const Section = styled.section<{ info: string, status: boolean }>`
     }
 
     li {
+      border: ${props => props.active ? "1px solid #fff" : "none"};
       cursor: pointer;
     }
   }
