@@ -17,7 +17,7 @@ const How = () => {
             <StepBox align='left' data-aos="fade-up">
                 <p >
                     원하는 색상을 두가지 선택합니다.
-                    그다음 제네레이트 버튼을 클릭합니다.
+                    그 다음 제네레이트 버튼을 클릭합니다.
                 </p>
                 <img src={`${process.env.PUBLIC_URL}/step1.png`} alt="" />
             </StepBox>
