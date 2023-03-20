@@ -1,4 +1,4 @@
-## Blended!
+## Blended
 <img src="https://user-images.githubusercontent.com/66665468/225890486-0d8e6401-7159-42d4-9ed7-418c0da6a223.jpg">
 
 #### 프로젝트 기간
@@ -8,6 +8,11 @@
 css 제네레이터 토이프로젝트<br />
 퍼블리셔 및 프론트엔드 개발자를 위한 사이트 입니다.
 색 선택 시 밝기에 따라 폰트 색상이 변화합니다.
+
+#### 업데잍트 방향
+추가 기능 기획 구상중
+1. 로그인을 위한 커뮤니티성 컨텐츠 추가
+2. 코드펜과 유사한 CSS 제네레이터 기능들 추가
 
 #### 프로젝트 URL
 https://wihyanghoon.github.io/Blended/
