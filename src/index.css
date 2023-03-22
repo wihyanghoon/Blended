@@ -1,8 +1,27 @@
+@font-face {
+  font-family: "SD_NEO";
+  font-weight: 700;
+  src: url("@font/AppleSDGothicNeoB.ttf") format("turetype");
+}
+
+@font-face {
+  font-family: "SD_NEO";
+  font-weight: 500;
+  src: url("@font/AppleSDGothicNeoM.ttf") format("turetype");
+}
+
+@font-face {
+  font-family: "SD_NEO";
+  font-weight: 400;
+  src: url("@font/AppleSDGothicNeoR.ttf") format("turetype");
+}
+
 *{
   margin: 0;
   padding: 0;
   list-style: none;
   box-sizing: border-box;
+  font-family: "SD_NEO";
 }
 
 a{
