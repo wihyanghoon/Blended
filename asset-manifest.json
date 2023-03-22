@@ -1,13 +1,16 @@
 {
   "files": {
-    "main.css": "/Blended/static/css/main.5d9bdea5.css",
-    "main.js": "/Blended/static/js/main.c8defcb7.js",
+    "main.css": "/Blended/static/css/main.cbfe005c.css",
+    "main.js": "/Blended/static/js/main.5d3293ba.js",
+    "static/media/AppleSDGothicNeoR.ttf": "/Blended/static/media/AppleSDGothicNeoR.d159b4d4ce2ef2592daa.ttf",
+    "static/media/AppleSDGothicNeoB.ttf": "/Blended/static/media/AppleSDGothicNeoB.4175a777557557f7d294.ttf",
+    "static/media/AppleSDGothicNeoM.ttf": "/Blended/static/media/AppleSDGothicNeoM.88c00162a2084f97069c.ttf",
     "index.html": "/Blended/index.html",
-    "main.5d9bdea5.css.map": "/Blended/static/css/main.5d9bdea5.css.map",
-    "main.c8defcb7.js.map": "/Blended/static/js/main.c8defcb7.js.map"
+    "main.cbfe005c.css.map": "/Blended/static/css/main.cbfe005c.css.map",
+    "main.5d3293ba.js.map": "/Blended/static/js/main.5d3293ba.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d9bdea5.css",
-    "static/js/main.c8defcb7.js"
+    "static/css/main.cbfe005c.css",
+    "static/js/main.5d3293ba.js"
   ]
 }
