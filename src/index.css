@@ -1,7 +1,7 @@
 @font-face {
   font-family: "SD_NEO";
   font-weight: 700;
-  src: url("font/AppleSDGothicNeoB.ttf") format("turetype");
+  src: url("./font/AppleSDGothicNeoB.ttf") format("turetype");
 }
 
 @font-face {
